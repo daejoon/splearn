@@ -1,7 +1,16 @@
 package com.ddoong2.splearn.domain;
 
+import lombok.Getter;
+import lombok.ToString;
+
+import java.util.Objects;
+
+import static org.springframework.util.Assert.state;
+
+@Getter
+@ToString
 public class Member {
-    
+
     private String email;
 
     private String nickname;
@@ -11,25 +20,21 @@ public class Member {
     private MemberStatus status;
 
     public Member(String email, String nickname, String passwordHash) {
-        this.email = email;
-        this.nickname = nickname;
-        this.passwordHash = passwordHash;
+        this.email = Objects.requireNonNull(email);
+        this.nickname = Objects.requireNonNull(nickname);
+        this.passwordHash = Objects.requireNonNull(passwordHash);
         this.status = MemberStatus.PENDING;
     }
 
-    public String getEmail() {
-        return email;
+    public void activate() {
+        state(this.status == MemberStatus.PENDING, "PENDING 상태가 아닙니다.");
+
+        this.status = MemberStatus.ACTIVATE;
     }
 
-    public String getNickname() {
-        return nickname;
-    }
+    public void deactivate() {
+        state(this.status == MemberStatus.ACTIVATE, "ACTIVE 상태가 아닙니다.");
 
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    public MemberStatus getStatus() {
-        return status;
+        this.status = MemberStatus.DEACTIVATE;
     }
 }
