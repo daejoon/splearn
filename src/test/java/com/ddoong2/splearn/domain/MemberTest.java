@@ -1,34 +1,44 @@
 package com.ddoong2.splearn.domain;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class MemberTest {
 
+    Member member;
+    PasswordEncoder passwordEncoder;
+
+    @BeforeEach
+    void setUp() {
+        this.passwordEncoder = new PasswordEncoder() {
+            @Override
+            public String encode(String password) {
+                return password.toUpperCase();
+            }
+
+            @Override
+            public boolean matches(String password, String passwordHash) {
+                return encode(password).equals(passwordHash);
+            }
+        };
+
+
+        member = Member.create("kkode1911@gmail.com", "daejoon", "secret", passwordEncoder);
+    }
+
     @Test
     void createMember() {
-        var member = new Member("kkode1911@gmail.com", "daejoon", "secret");
-
         assertThat(member.getStatus()).isEqualTo(MemberStatus.PENDING);
     }
 
     @Test
-    @DisplayName("생성자에서 널 체크를 잘 하는가")
-    void _생성자에서_널_체크를_잘_하는가() {
-
-        assertThatThrownBy(() -> new Member(null, "daejoon", "secret"))
-                .isInstanceOf(NullPointerException.class);
-    }
-
-
-    @Test
     @DisplayName("멤버를 활성화 한다")
     void _멤버를_활성화_한다() {
-
-        var member = new Member("kkode1911@gmail", "daejoon", "secret");
 
         member.activate();
 
@@ -38,7 +48,6 @@ class MemberTest {
     @Test
     @DisplayName("멤버 활성화 실패")
     void _멤버_활성화_실패() {
-        var member = new Member("kkode1911@gmail", "daejoon", "secret");
 
         member.activate();
 
@@ -51,7 +60,6 @@ class MemberTest {
     @DisplayName("가입완료 상태에서 탈퇴할수 있다")
     void _가입완료_상태에서_탈퇴할수_있다() {
 
-        var member = new Member("kkode1911@gmail", "daejoon", "secret");
         member.activate();
 
         member.deactivate();
@@ -61,7 +69,6 @@ class MemberTest {
 
     @Test
     void deactivateFail() {
-        var member = new Member("kkode1911@gmail", "daejoon", "secret");
 
         assertThatThrownBy(() -> {
             member.deactivate();
@@ -73,5 +80,31 @@ class MemberTest {
         assertThatThrownBy(() -> {
             member.deactivate();
         }).isInstanceOf(IllegalStateException.class);
+    }
+
+    @Test
+    @DisplayName("비밀번호를 확인")
+    void _비밀번호를_확인() {
+        assertThat(member.verifyPassword("secret", passwordEncoder)).isTrue();
+        assertThat(member.verifyPassword("hello", passwordEncoder)).isFalse();
+    }
+
+    @Test
+    @DisplayName("닉네임 변경")
+    void _닉네임_변경() {
+        assertThat(member.getNickname()).isEqualTo("daejoon");
+
+        member.changeNickname("hoho");
+
+        assertThat(member.getNickname()).isEqualTo("hoho");
+    }
+
+    @Test
+    @DisplayName("비밀번호 변경")
+    void _비밀번호_변경() {
+
+        member.changePassword("verysecret", passwordEncoder);
+
+        assertThat(member.verifyPassword("verysecret", passwordEncoder)).isTrue();
     }
 }
