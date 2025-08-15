@@ -9,7 +9,6 @@ import static org.springframework.util.Assert.state;
 @Getter
 @ToString
 public class Member {
-
     private Email email;
 
     private String nickname;

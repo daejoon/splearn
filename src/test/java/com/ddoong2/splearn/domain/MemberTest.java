@@ -37,7 +37,6 @@ class MemberTest {
     @Test
     @DisplayName("멤버를 활성화 한다")
     void _멤버를_활성화_한다() {
-
         member.activate();
 
         assertThat(member.getStatus()).isEqualTo(MemberStatus.ACTIVATE);
@@ -46,7 +45,6 @@ class MemberTest {
     @Test
     @DisplayName("멤버 활성화 실패")
     void _멤버_활성화_실패() {
-
         member.activate();
 
         assertThatThrownBy(() -> {
@@ -57,7 +55,6 @@ class MemberTest {
     @Test
     @DisplayName("가입완료 상태에서 탈퇴할수 있다")
     void _가입완료_상태에서_탈퇴할수_있다() {
-
         member.activate();
 
         member.deactivate();
@@ -67,7 +64,6 @@ class MemberTest {
 
     @Test
     void deactivateFail() {
-
         assertThatThrownBy(() -> {
             member.deactivate();
         }).isInstanceOf(IllegalStateException.class);
@@ -100,7 +96,6 @@ class MemberTest {
     @Test
     @DisplayName("비밀번호 변경")
     void _비밀번호_변경() {
-
         member.changePassword("verysecret", passwordEncoder);
 
         assertThat(member.verifyPassword("verysecret", passwordEncoder)).isTrue();
@@ -109,7 +104,6 @@ class MemberTest {
     @Test
     @DisplayName("상태체크")
     void isActive() {
-
         assertThat(member.isActive()).isFalse();
 
         member.activate();
@@ -124,7 +118,6 @@ class MemberTest {
     @Test
     @DisplayName("이메일주소 검증")
     void _이메일주소_검증() {
-
         assertThatThrownBy(() -> {
             Member.create(new MemberCreateRequest("Invalid Email", "daejoon", "secret"), passwordEncoder);
         }).isInstanceOf(IllegalArgumentException.class);
