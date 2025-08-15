@@ -14,19 +14,9 @@ class MemberTest {
 
     @BeforeEach
     void setUp() {
-        this.passwordEncoder = new PasswordEncoder() {
-            @Override
-            public String encode(String password) {
-                return password.toUpperCase();
-            }
+        this.passwordEncoder = MemberFixture.createPasswordEncoder();
 
-            @Override
-            public boolean matches(String password, String passwordHash) {
-                return encode(password).equals(passwordHash);
-            }
-        };
-
-        member = Member.register(new MemberRegisterRequest("kkode1911@gmail.com", "daejoon", "secret"), passwordEncoder);
+        member = Member.register(MemberFixture.createMemberRegisterRequest(), passwordEncoder);
     }
 
     @Test
@@ -119,9 +109,10 @@ class MemberTest {
     @DisplayName("이메일주소 검증")
     void _이메일주소_검증() {
         assertThatThrownBy(() -> {
-            Member.register(new MemberRegisterRequest("Invalid Email", "daejoon", "secret"), passwordEncoder);
+            Member.register(MemberFixture.createMemberRegisterRequest("Invalid Email"), passwordEncoder);
         }).isInstanceOf(IllegalArgumentException.class);
 
-        Member.register(new MemberRegisterRequest("kkode1911@gmail.com", "daejoon", "secret"), passwordEncoder);
+        Member.register(MemberFixture.createMemberRegisterRequest(), passwordEncoder);
     }
+
 }
