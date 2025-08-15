@@ -6,10 +6,12 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.dao.DataIntegrityViolationException;
 
 import static com.ddoong2.splearn.domain.MemberFixture.createMemberRegisterRequest;
 import static com.ddoong2.splearn.domain.MemberFixture.createPasswordEncoder;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DataJpaTest
 class MemberRepositoryTest {
@@ -32,5 +34,17 @@ class MemberRepositoryTest {
         assertThat(member.getId()).isNotNull();
 
         entityManager.flush();
+    }
+
+    @Test
+    @DisplayName("중복 이메일 회원 저장 실패")
+    void _중복_이메일_회원_저장_실패() {
+        Member member = Member.register(createMemberRegisterRequest(), createPasswordEncoder());
+        memberRepository.save(member);
+
+        Member member2 = Member.register(createMemberRegisterRequest(), createPasswordEncoder());
+        assertThatThrownBy(() -> {
+            memberRepository.save(member2);
+        }).isInstanceOf(DataIntegrityViolationException.class);
     }
 }
