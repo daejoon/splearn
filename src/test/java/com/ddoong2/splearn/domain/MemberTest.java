@@ -26,11 +26,11 @@ class MemberTest {
             }
         };
 
-        member = Member.create(new MemberCreateRequest("kkode1911@gmail.com", "daejoon", "secret"), passwordEncoder);
+        member = Member.register(new MemberRegisterRequest("kkode1911@gmail.com", "daejoon", "secret"), passwordEncoder);
     }
 
     @Test
-    void createMember() {
+    void registerMember() {
         assertThat(member.getStatus()).isEqualTo(MemberStatus.PENDING);
     }
 
@@ -119,9 +119,9 @@ class MemberTest {
     @DisplayName("이메일주소 검증")
     void _이메일주소_검증() {
         assertThatThrownBy(() -> {
-            Member.create(new MemberCreateRequest("Invalid Email", "daejoon", "secret"), passwordEncoder);
+            Member.register(new MemberRegisterRequest("Invalid Email", "daejoon", "secret"), passwordEncoder);
         }).isInstanceOf(IllegalArgumentException.class);
 
-        Member.create(new MemberCreateRequest("kkode1911@gmail.com", "daejoon", "secret"), passwordEncoder);
+        Member.register(new MemberRegisterRequest("kkode1911@gmail.com", "daejoon", "secret"), passwordEncoder);
     }
 }
