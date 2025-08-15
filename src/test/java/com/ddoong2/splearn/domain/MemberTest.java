@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -27,8 +26,7 @@ class MemberTest {
             }
         };
 
-
-        member = Member.create("kkode1911@gmail.com", "daejoon", "secret", passwordEncoder);
+        member = Member.create(new MemberCreateRequest("kkode1911@gmail.com", "daejoon", "secret"), passwordEncoder);
     }
 
     @Test
@@ -76,7 +74,7 @@ class MemberTest {
 
         member.activate();
         member.deactivate();
-        
+
         assertThatThrownBy(() -> {
             member.deactivate();
         }).isInstanceOf(IllegalStateException.class);
@@ -106,5 +104,20 @@ class MemberTest {
         member.changePassword("verysecret", passwordEncoder);
 
         assertThat(member.verifyPassword("verysecret", passwordEncoder)).isTrue();
+    }
+
+    @Test
+    @DisplayName("상태체크")
+    void isActive() {
+
+        assertThat(member.isActive()).isFalse();
+
+        member.activate();
+
+        assertThat(member.isActive()).isTrue();
+
+        member.deactivate();
+
+        assertThat(member.isActive()).isFalse();
     }
 }
