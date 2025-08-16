@@ -34,7 +34,7 @@ record MemberRegisterTest(MemberRegister memberRegister, EntityManager entityMan
     @Test
     @DisplayName("이메일 중복 실패")
     void _이메일_중복_실패() {
-        Member member = memberRegister.register(MemberFixture.createMemberRegisterRequest());
+        memberRegister.register(MemberFixture.createMemberRegisterRequest());
         assertThatThrownBy(() -> {
             memberRegister.register(MemberFixture.createMemberRegisterRequest());
         }).isInstanceOf(DuplicateEmailException.class);
@@ -56,13 +56,12 @@ record MemberRegisterTest(MemberRegister memberRegister, EntityManager entityMan
     @Test
     @DisplayName("memberRegisterRequestFail")
     void _memberRegisterRequestFail() {
-
-        validated(new MemberRegisterRequest("fail@gmail.com", "1234", "long_secret"));
-        validated(new MemberRegisterRequest("fail@gmail.com", "daejoon_________", "secret"));
-        validated(new MemberRegisterRequest("failgmail.com", "daejoon_________", "long_secret"));
+        checkValidation(new MemberRegisterRequest("fail@gmail.com", "1234", "long_secret"));
+        checkValidation(new MemberRegisterRequest("fail@gmail.com", "daejoon_________", "secret"));
+        checkValidation(new MemberRegisterRequest("failgmail.com", "daejoon_________", "long_secret"));
     }
 
-    private void validated(MemberRegisterRequest invalid) {
+    private void checkValidation(MemberRegisterRequest invalid) {
         assertThatThrownBy(() -> {
             memberRegister.register(invalid);
         }).isInstanceOf(ConstraintViolationException.class);
