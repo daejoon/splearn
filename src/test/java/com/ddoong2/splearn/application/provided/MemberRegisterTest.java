@@ -6,8 +6,8 @@ import com.ddoong2.splearn.domain.Member;
 import com.ddoong2.splearn.domain.MemberFixture;
 import com.ddoong2.splearn.domain.MemberRegisterRequest;
 import com.ddoong2.splearn.domain.MemberStatus;
+import jakarta.persistence.EntityManager;
 import jakarta.validation.ConstraintViolationException;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -15,11 +15,12 @@ import org.springframework.context.annotation.Import;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @SpringBootTest
 @Transactional
 @Import(SplearnTestConfiguration.class)
-public record MemberRegisterTest(MemberRegister memberRegister) {
+record MemberRegisterTest(MemberRegister memberRegister, EntityManager entityManager) {
 
     @Test
     @DisplayName("스프링부트 등록테스트")
@@ -34,9 +35,22 @@ public record MemberRegisterTest(MemberRegister memberRegister) {
     @DisplayName("이메일 중복 실패")
     void _이메일_중복_실패() {
         Member member = memberRegister.register(MemberFixture.createMemberRegisterRequest());
-        Assertions.assertThatThrownBy(() -> {
+        assertThatThrownBy(() -> {
             memberRegister.register(MemberFixture.createMemberRegisterRequest());
         }).isInstanceOf(DuplicateEmailException.class);
+    }
+
+    @Test
+    @DisplayName("activate")
+    void _activate() {
+        Member member = memberRegister.register(MemberFixture.createMemberRegisterRequest());
+        entityManager.flush();
+        entityManager.clear();
+
+        Member actual = memberRegister.activate(member.getId());
+        entityManager.flush();
+
+        assertThat(actual.getStatus()).isEqualTo(MemberStatus.ACTIVATE);
     }
 
     @Test
@@ -49,7 +63,7 @@ public record MemberRegisterTest(MemberRegister memberRegister) {
     }
 
     private void validated(MemberRegisterRequest invalid) {
-        Assertions.assertThatThrownBy(() -> {
+        assertThatThrownBy(() -> {
             memberRegister.register(invalid);
         }).isInstanceOf(ConstraintViolationException.class);
     }
