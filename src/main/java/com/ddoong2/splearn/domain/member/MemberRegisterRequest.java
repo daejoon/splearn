@@ -1,4 +1,4 @@
-package com.ddoong2.splearn.domain;
+package com.ddoong2.splearn.domain.member;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;

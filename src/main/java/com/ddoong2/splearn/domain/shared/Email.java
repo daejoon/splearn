@@ -1,4 +1,4 @@
-package com.ddoong2.splearn.domain;
+package com.ddoong2.splearn.domain.shared;
 
 import java.util.regex.Pattern;
 

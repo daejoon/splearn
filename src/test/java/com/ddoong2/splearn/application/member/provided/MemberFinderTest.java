@@ -1,8 +1,8 @@
-package com.ddoong2.splearn.application.provided;
+package com.ddoong2.splearn.application.member.provided;
 
 import com.ddoong2.splearn.SplearnTestConfiguration;
-import com.ddoong2.splearn.domain.Member;
-import com.ddoong2.splearn.domain.MemberFixture;
+import com.ddoong2.splearn.domain.member.Member;
+import com.ddoong2.splearn.domain.member.MemberFixture;
 import jakarta.persistence.EntityManager;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

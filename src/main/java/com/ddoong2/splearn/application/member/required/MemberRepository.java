@@ -1,7 +1,7 @@
-package com.ddoong2.splearn.application.required;
+package com.ddoong2.splearn.application.member.required;
 
-import com.ddoong2.splearn.domain.Email;
-import com.ddoong2.splearn.domain.Member;
+import com.ddoong2.splearn.domain.member.Member;
+import com.ddoong2.splearn.domain.shared.Email;
 import org.springframework.data.repository.Repository;
 
 import java.util.Optional;

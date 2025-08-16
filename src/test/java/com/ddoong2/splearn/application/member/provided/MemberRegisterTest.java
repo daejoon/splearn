@@ -1,11 +1,11 @@
-package com.ddoong2.splearn.application.provided;
+package com.ddoong2.splearn.application.member.provided;
 
 import com.ddoong2.splearn.SplearnTestConfiguration;
-import com.ddoong2.splearn.domain.DuplicateEmailException;
-import com.ddoong2.splearn.domain.Member;
-import com.ddoong2.splearn.domain.MemberFixture;
-import com.ddoong2.splearn.domain.MemberRegisterRequest;
-import com.ddoong2.splearn.domain.MemberStatus;
+import com.ddoong2.splearn.domain.member.DuplicateEmailException;
+import com.ddoong2.splearn.domain.member.Member;
+import com.ddoong2.splearn.domain.member.MemberFixture;
+import com.ddoong2.splearn.domain.member.MemberRegisterRequest;
+import com.ddoong2.splearn.domain.member.MemberStatus;
 import jakarta.persistence.EntityManager;
 import jakarta.validation.ConstraintViolationException;
 import org.junit.jupiter.api.DisplayName;

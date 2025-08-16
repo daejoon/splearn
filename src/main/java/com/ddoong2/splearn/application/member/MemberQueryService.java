@@ -1,8 +1,8 @@
-package com.ddoong2.splearn.application;
+package com.ddoong2.splearn.application.member;
 
-import com.ddoong2.splearn.application.provided.MemberFinder;
-import com.ddoong2.splearn.application.required.MemberRepository;
-import com.ddoong2.splearn.domain.Member;
+import com.ddoong2.splearn.application.member.provided.MemberFinder;
+import com.ddoong2.splearn.application.member.required.MemberRepository;
+import com.ddoong2.splearn.domain.member.Member;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

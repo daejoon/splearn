@@ -1,7 +1,7 @@
 package com.ddoong2.splearn.adapter.integration;
 
-import com.ddoong2.splearn.application.required.EmailSender;
-import com.ddoong2.splearn.domain.Email;
+import com.ddoong2.splearn.application.member.required.EmailSender;
+import com.ddoong2.splearn.domain.shared.Email;
 import org.springframework.context.annotation.Fallback;
 import org.springframework.stereotype.Component;
 

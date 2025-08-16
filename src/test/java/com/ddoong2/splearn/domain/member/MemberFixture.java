@@ -1,4 +1,4 @@
-package com.ddoong2.splearn.domain;
+package com.ddoong2.splearn.domain.member;
 
 public class MemberFixture {
     public static MemberRegisterRequest createMemberRegisterRequest(String email) {

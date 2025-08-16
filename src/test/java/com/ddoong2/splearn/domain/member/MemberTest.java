@@ -1,4 +1,4 @@
-package com.ddoong2.splearn.domain;
+package com.ddoong2.splearn.domain.member;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -15,21 +15,24 @@ class MemberTest {
     @BeforeEach
     void setUp() {
         this.passwordEncoder = MemberFixture.createPasswordEncoder();
-
         member = Member.register(MemberFixture.createMemberRegisterRequest(), passwordEncoder);
     }
 
     @Test
     void registerMember() {
         assertThat(member.getStatus()).isEqualTo(MemberStatus.PENDING);
+        assertThat(member.getDetail().getRegisteredAt()).isNotNull();
     }
 
     @Test
     @DisplayName("멤버를 활성화 한다")
     void _멤버를_활성화_한다() {
+        assertThat(member.getDetail().getActivatedAt()).isNull();
+
         member.activate();
 
         assertThat(member.getStatus()).isEqualTo(MemberStatus.ACTIVATE);
+        assertThat(member.getDetail().getActivatedAt()).isNotNull();
     }
 
     @Test
@@ -50,6 +53,7 @@ class MemberTest {
         member.deactivate();
 
         assertThat(member.getStatus()).isEqualTo(MemberStatus.DEACTIVATE);
+        assertThat(member.getDetail().getDeactivatedAt()).isNotNull();
     }
 
     @Test
@@ -107,12 +111,25 @@ class MemberTest {
 
     @Test
     @DisplayName("이메일주소 검증")
-    void _이메일주소_검증() {
+    void invalidEmail() {
         assertThatThrownBy(() -> {
             Member.register(MemberFixture.createMemberRegisterRequest("Invalid Email"), passwordEncoder);
         }).isInstanceOf(IllegalArgumentException.class);
 
         Member.register(MemberFixture.createMemberRegisterRequest(), passwordEncoder);
+    }
+
+    @Test
+    @DisplayName("updateInfo")
+    void _updateInfo() {
+        member.activate();
+
+        MemberInfoUpdateRequest request = new MemberInfoUpdateRequest("daejoon2", "myprofile", "자기소개");
+        member.updateInfo(request);
+
+        assertThat(member.getNickname()).isEqualTo(request.nickname());
+        assertThat(member.getDetail().getProfile().address()).isEqualTo(request.profileAddress());
+        assertThat(member.getDetail().getIntroduction()).isEqualTo(request.introduction());
     }
 
 }

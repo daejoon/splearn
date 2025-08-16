@@ -1,6 +1,6 @@
 package com.ddoong2.splearn.adapter.integration;
 
-import com.ddoong2.splearn.domain.Email;
+import com.ddoong2.splearn.domain.shared.Email;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junitpioneer.jupiter.StdIo;

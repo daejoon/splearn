@@ -1,13 +1,13 @@
-package com.ddoong2.splearn.application;
+package com.ddoong2.splearn.application.member;
 
-import com.ddoong2.splearn.application.provided.MemberRegister;
-import com.ddoong2.splearn.application.required.EmailSender;
-import com.ddoong2.splearn.application.required.MemberRepository;
-import com.ddoong2.splearn.domain.DuplicateEmailException;
-import com.ddoong2.splearn.domain.Email;
-import com.ddoong2.splearn.domain.Member;
-import com.ddoong2.splearn.domain.MemberRegisterRequest;
-import com.ddoong2.splearn.domain.PasswordEncoder;
+import com.ddoong2.splearn.application.member.provided.MemberRegister;
+import com.ddoong2.splearn.application.member.required.EmailSender;
+import com.ddoong2.splearn.application.member.required.MemberRepository;
+import com.ddoong2.splearn.domain.member.DuplicateEmailException;
+import com.ddoong2.splearn.domain.member.Member;
+import com.ddoong2.splearn.domain.member.MemberRegisterRequest;
+import com.ddoong2.splearn.domain.member.PasswordEncoder;
+import com.ddoong2.splearn.domain.shared.Email;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
