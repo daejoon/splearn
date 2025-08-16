@@ -69,7 +69,7 @@ class MemberTest {
     @Test
     @DisplayName("비밀번호를 확인")
     void _비밀번호를_확인() {
-        assertThat(member.verifyPassword("secret", passwordEncoder)).isTrue();
+        assertThat(member.verifyPassword("very_long_secret", passwordEncoder)).isTrue();
         assertThat(member.verifyPassword("hello", passwordEncoder)).isFalse();
     }
 

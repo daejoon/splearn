@@ -4,7 +4,9 @@ import com.ddoong2.splearn.SplearnTestConfiguration;
 import com.ddoong2.splearn.domain.DuplicateEmailException;
 import com.ddoong2.splearn.domain.Member;
 import com.ddoong2.splearn.domain.MemberFixture;
+import com.ddoong2.splearn.domain.MemberRegisterRequest;
 import com.ddoong2.splearn.domain.MemberStatus;
+import jakarta.validation.ConstraintViolationException;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -37,4 +39,18 @@ public record MemberRegisterTest(MemberRegister memberRegister) {
         }).isInstanceOf(DuplicateEmailException.class);
     }
 
+    @Test
+    @DisplayName("memberRegisterRequestFail")
+    void _memberRegisterRequestFail() {
+
+        validated(new MemberRegisterRequest("fail@gmail.com", "1234", "long_secret"));
+        validated(new MemberRegisterRequest("fail@gmail.com", "daejoon_________", "secret"));
+        validated(new MemberRegisterRequest("failgmail.com", "daejoon_________", "long_secret"));
+    }
+
+    private void validated(MemberRegisterRequest invalid) {
+        Assertions.assertThatThrownBy(() -> {
+            memberRegister.register(invalid);
+        }).isInstanceOf(ConstraintViolationException.class);
+    }
 }

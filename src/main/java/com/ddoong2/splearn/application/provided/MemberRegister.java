@@ -2,6 +2,7 @@ package com.ddoong2.splearn.application.provided;
 
 import com.ddoong2.splearn.domain.Member;
 import com.ddoong2.splearn.domain.MemberRegisterRequest;
+import jakarta.validation.Valid;
 
 public interface MemberRegister {
     /**
@@ -10,5 +11,5 @@ public interface MemberRegister {
      * @param registerRequest 회원 등록 요청 정보를 포함하는 객체
      * @return 등록된 회원 객체
      */
-    Member register(MemberRegisterRequest registerRequest);
+    Member register(@Valid MemberRegisterRequest registerRequest);
 }
