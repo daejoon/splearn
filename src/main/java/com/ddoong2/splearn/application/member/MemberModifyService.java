@@ -5,6 +5,7 @@ import com.ddoong2.splearn.application.member.required.EmailSender;
 import com.ddoong2.splearn.application.member.required.MemberRepository;
 import com.ddoong2.splearn.domain.member.DuplicateEmailException;
 import com.ddoong2.splearn.domain.member.Member;
+import com.ddoong2.splearn.domain.member.MemberInfoUpdateRequest;
 import com.ddoong2.splearn.domain.member.MemberRegisterRequest;
 import com.ddoong2.splearn.domain.member.PasswordEncoder;
 import com.ddoong2.splearn.domain.shared.Email;
@@ -41,6 +42,24 @@ public class MemberModifyService implements MemberRegister {
         Member member = memberQueryService.find(memberId);
 
         member.activate();
+
+        return memberRepository.save(member);
+    }
+
+    @Override
+    public Member deactivate(Long memberId) {
+        Member member = memberQueryService.find(memberId);
+
+        member.deactivate();
+
+        return memberRepository.save(member);
+    }
+
+    @Override
+    public Member updateInfo(Long memberId, MemberInfoUpdateRequest memberInfoUpdateRequest) {
+        Member member = memberQueryService.find(memberId);
+
+        member.updateInfo(memberInfoUpdateRequest);
 
         return memberRepository.save(member);
     }

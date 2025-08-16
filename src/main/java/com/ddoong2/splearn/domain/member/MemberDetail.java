@@ -1,7 +1,6 @@
 package com.ddoong2.splearn.domain.member;
 
 import com.ddoong2.splearn.domain.AbstractEntity;
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -20,7 +19,6 @@ import static org.springframework.util.Assert.isTrue;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @NaturalIdCache
 public class MemberDetail extends AbstractEntity {
-    @Embedded
     private Profile profile;
 
     private String introduction;
