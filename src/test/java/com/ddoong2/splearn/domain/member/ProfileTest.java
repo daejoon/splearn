@@ -19,7 +19,6 @@ class ProfileTest {
     @Test
     @DisplayName("profileFail")
     void _profileFail() {
-        assertThatThrownBy(() -> new Profile("")).isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> new Profile("asdfkajsdfkjaskdfjkasjdfkajskdjfaksjfkajkfjaskfd")).isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> new Profile("AAA")).isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> new Profile("프로필")).isInstanceOf(IllegalArgumentException.class);

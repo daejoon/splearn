@@ -39,12 +39,10 @@
                     <cascade-all/>
                 </cascade>
             </one-to-one>
-            <embedded name="email">
-            </embedded>
+            <embedded name="email"/>
         </attributes>
     </entity>
 
-    <!-- MemberDetail 엔티티 매핑 -->
     <entity class="com.ddoong2.splearn.domain.member.MemberDetail">
         <table name="member_detail">
             <unique-constraint name="UK_MEMBER_DETAIL_PROFILE_ADDRESS">
@@ -52,27 +50,22 @@
             </unique-constraint>
         </table>
         <attributes>
-            <embedded name="profile"/>
-
             <basic name="introduction">
                 <column name="introduction" column-definition="TEXT"/>
             </basic>
-
             <basic name="registeredAt">
                 <column name="registered_at" nullable="false"/>
             </basic>
-
             <basic name="activatedAt">
                 <column name="activated_at"/>
             </basic>
-
             <basic name="deactivatedAt">
                 <column name="deactivated_at"/>
             </basic>
+            <embedded name="profile"/>
         </attributes>
     </entity>
 
-    <!-- Profile 임베더블 매핑 -->
     <embeddable class="com.ddoong2.splearn.domain.member.Profile">
         <attributes>
             <basic name="address">
@@ -80,7 +73,6 @@
             </basic>
         </attributes>
     </embeddable>
-
 
     <embeddable class="com.ddoong2.splearn.domain.shared.Email">
         <attributes>

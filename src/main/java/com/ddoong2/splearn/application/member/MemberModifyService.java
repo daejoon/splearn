@@ -4,10 +4,12 @@ import com.ddoong2.splearn.application.member.provided.MemberRegister;
 import com.ddoong2.splearn.application.member.required.EmailSender;
 import com.ddoong2.splearn.application.member.required.MemberRepository;
 import com.ddoong2.splearn.domain.member.DuplicateEmailException;
+import com.ddoong2.splearn.domain.member.DuplicateProfileException;
 import com.ddoong2.splearn.domain.member.Member;
 import com.ddoong2.splearn.domain.member.MemberInfoUpdateRequest;
 import com.ddoong2.splearn.domain.member.MemberRegisterRequest;
 import com.ddoong2.splearn.domain.member.PasswordEncoder;
+import com.ddoong2.splearn.domain.member.Profile;
 import com.ddoong2.splearn.domain.shared.Email;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -59,9 +61,22 @@ public class MemberModifyService implements MemberRegister {
     public Member updateInfo(Long memberId, MemberInfoUpdateRequest memberInfoUpdateRequest) {
         Member member = memberQueryService.find(memberId);
 
+        checkDuplicateProfile(member, memberInfoUpdateRequest.profileAddress());
+
         member.updateInfo(memberInfoUpdateRequest);
 
         return memberRepository.save(member);
+    }
+
+    private void checkDuplicateProfile(Member member, String profileAddress) {
+        if (profileAddress.isEmpty()) return;
+
+        Profile currentProfile = member.getDetail().getProfile();
+        if (currentProfile != null && currentProfile.address().equals(profileAddress)) return;
+
+        if (memberRepository.findByProfile(new Profile(profileAddress)).isPresent()) {
+            throw new DuplicateProfileException("이미존재하는 프로필 입니다 Profile: " + profileAddress);
+        }
     }
 
     private void sendWelcomeEmail(Member member) {
