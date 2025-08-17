@@ -40,12 +40,13 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok")
     testAnnotationProcessor("org.projectlombok:lombok")
 
+    testCompileOnly("org.projectlombok:lombok")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     testImplementation("org.junit-pioneer:junit-pioneer:2.3.0")
     testImplementation("org.mockito:mockito-core:5.18.0")
+    testImplementation("com.tngtech.archunit:archunit-junit5:1.4.1")
 
-    testCompileOnly("org.projectlombok:lombok")
-    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 
     mockitoAgent("org.mockito:mockito-core:5.18.0") { isTransitive = false }
 }
