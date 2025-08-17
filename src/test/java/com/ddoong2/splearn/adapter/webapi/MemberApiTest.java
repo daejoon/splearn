@@ -1,6 +1,7 @@
 package com.ddoong2.splearn.adapter.webapi;
 
 import com.ddoong2.splearn.adapter.webapi.dto.MemberRegisterResponse;
+import com.ddoong2.splearn.application.member.provided.MemberRegister;
 import com.ddoong2.splearn.application.member.required.MemberRepository;
 import com.ddoong2.splearn.domain.member.Member;
 import com.ddoong2.splearn.domain.member.MemberFixture;
@@ -13,6 +14,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.assertj.MockMvcTester;
 import org.springframework.test.web.servlet.assertj.MvcTestResult;
@@ -23,6 +25,7 @@ import java.io.UnsupportedEncodingException;
 import static com.ddoong2.splearn.AssertThatUtils.equalsTo;
 import static com.ddoong2.splearn.AssertThatUtils.notNull;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -32,6 +35,7 @@ class MemberApiTest {
     final MockMvcTester mvcTester;
     final ObjectMapper objectMapper;
     final MemberRepository memberRepository;
+    final MemberRegister memberRegister;
 
     @Test
     @DisplayName("register")
@@ -56,6 +60,23 @@ class MemberApiTest {
         assertThat(member.getEmail().address()).isEqualTo(request.email());
         assertThat(member.getNickname()).isEqualTo(request.nickname());
         assertThat(member.getStatus()).isEqualTo(MemberStatus.PENDING);
+    }
+
+    @Test
+    @DisplayName("duplicateEmail")
+    void _duplicateEmail() throws JsonProcessingException {
+        memberRegister.register(MemberFixture.createMemberRegisterRequest());
+
+        MemberRegisterRequest request = MemberFixture.createMemberRegisterRequest();
+        String requestJson = objectMapper.writeValueAsString(request);
+
+        MvcTestResult result = mvcTester.post().uri("/api/members").contentType(MediaType.APPLICATION_JSON)
+                                        .content(requestJson)
+                                        .exchange();
+
+        assertThat(result)
+                .apply(print())
+                .hasStatus(HttpStatus.CONFLICT);
     }
 
 }
