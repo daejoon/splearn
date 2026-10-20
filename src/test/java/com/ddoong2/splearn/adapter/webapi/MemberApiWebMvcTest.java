@@ -1,9 +1,9 @@
 package com.ddoong2.splearn.adapter.webapi;
 
 import com.ddoong2.splearn.application.member.provided.MemberRegister;
+import com.ddoong2.splearn.application.member.provided.MemberRegisterRequest;
 import com.ddoong2.splearn.domain.member.Member;
 import com.ddoong2.splearn.domain.member.MemberFixture;
-import com.ddoong2.splearn.domain.member.MemberRegisterRequest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,8 @@ class MemberApiWebMvcTest {
     final MockMvcTester mvcTester;
     final ObjectMapper objectMapper;
 
-    @MockitoBean MemberRegister memberRegister;
+    @MockitoBean
+    MemberRegister memberRegister;
 
     @Test
     @DisplayName("register")
@@ -38,7 +39,7 @@ class MemberApiWebMvcTest {
         String requestJson = objectMapper.writeValueAsString(request);
 
         assertThat(mvcTester.post().uri("/api/members").contentType(MediaType.APPLICATION_JSON)
-                            .content(requestJson))
+                .content(requestJson))
                 .hasStatusOk()
                 .bodyJson()
                 .extractingPath("$.memberId").asNumber().isEqualTo(1);
@@ -53,7 +54,7 @@ class MemberApiWebMvcTest {
         String requestJson = objectMapper.writeValueAsString(request);
 
         assertThat(mvcTester.post().uri("/api/members").contentType(MediaType.APPLICATION_JSON)
-                            .content(requestJson))
+                .content(requestJson))
                 .hasStatus(HttpStatus.BAD_REQUEST);
     }
 

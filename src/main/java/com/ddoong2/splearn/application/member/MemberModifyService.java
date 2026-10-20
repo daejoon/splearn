@@ -1,13 +1,13 @@
 package com.ddoong2.splearn.application.member;
 
 import com.ddoong2.splearn.application.member.provided.MemberRegister;
+import com.ddoong2.splearn.application.member.provided.MemberRegisterRequest;
 import com.ddoong2.splearn.application.member.required.EmailSender;
 import com.ddoong2.splearn.application.member.required.MemberRepository;
 import com.ddoong2.splearn.domain.member.DuplicateEmailException;
 import com.ddoong2.splearn.domain.member.DuplicateProfileException;
 import com.ddoong2.splearn.domain.member.Member;
 import com.ddoong2.splearn.domain.member.MemberInfoUpdateRequest;
-import com.ddoong2.splearn.domain.member.MemberRegisterRequest;
 import com.ddoong2.splearn.domain.member.PasswordEncoder;
 import com.ddoong2.splearn.domain.member.Profile;
 import com.ddoong2.splearn.domain.shared.Email;
@@ -30,7 +30,7 @@ public class MemberModifyService implements MemberRegister {
     public Member register(MemberRegisterRequest registerRequest) {
         checkDuplicateEmail(registerRequest);
 
-        Member member = Member.register(registerRequest, passwordEncoder);
+        Member member = Member.register(registerRequest.toInfo(), passwordEncoder);
 
         memberRepository.save(member);
 

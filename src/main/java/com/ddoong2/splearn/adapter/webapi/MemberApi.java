@@ -2,8 +2,8 @@ package com.ddoong2.splearn.adapter.webapi;
 
 import com.ddoong2.splearn.adapter.webapi.dto.MemberRegisterResponse;
 import com.ddoong2.splearn.application.member.provided.MemberRegister;
+import com.ddoong2.splearn.application.member.provided.MemberRegisterRequest;
 import com.ddoong2.splearn.domain.member.Member;
-import com.ddoong2.splearn.domain.member.MemberRegisterRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;

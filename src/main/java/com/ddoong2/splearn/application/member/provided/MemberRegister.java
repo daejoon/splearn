@@ -2,7 +2,6 @@ package com.ddoong2.splearn.application.member.provided;
 
 import com.ddoong2.splearn.domain.member.Member;
 import com.ddoong2.splearn.domain.member.MemberInfoUpdateRequest;
-import com.ddoong2.splearn.domain.member.MemberRegisterRequest;
 import jakarta.validation.Valid;
 
 /**

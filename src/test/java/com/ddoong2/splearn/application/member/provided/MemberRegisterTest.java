@@ -6,7 +6,6 @@ import com.ddoong2.splearn.domain.member.DuplicateProfileException;
 import com.ddoong2.splearn.domain.member.Member;
 import com.ddoong2.splearn.domain.member.MemberFixture;
 import com.ddoong2.splearn.domain.member.MemberInfoUpdateRequest;
-import com.ddoong2.splearn.domain.member.MemberRegisterRequest;
 import com.ddoong2.splearn.domain.member.MemberStatus;
 import jakarta.persistence.EntityManager;
 import jakarta.validation.ConstraintViolationException;

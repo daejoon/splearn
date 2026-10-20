@@ -33,7 +33,7 @@ public class Member extends AbstractEntity {
 
     private MemberDetail detail;
 
-    public static Member register(MemberRegisterRequest registerRequest, PasswordEncoder passwordEncoder) {
+    public static Member register(MemberRegisterInfo registerRequest, PasswordEncoder passwordEncoder) {
         Member member = new Member();
 
         member.email = new Email(registerRequest.email());

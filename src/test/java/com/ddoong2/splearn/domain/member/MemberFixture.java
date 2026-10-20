@@ -1,10 +1,11 @@
 package com.ddoong2.splearn.domain.member;
 
+import com.ddoong2.splearn.application.member.provided.MemberRegisterRequest;
 import org.springframework.test.util.ReflectionTestUtils;
 
 public class MemberFixture {
     public static Member createMember(Long memberId) {
-        Member member = Member.register(createMemberRegisterRequest(), createPasswordEncoder());
+        Member member = Member.register(createMemberRegisterRequest().toInfo(), createPasswordEncoder());
         ReflectionTestUtils.setField(member, "id", memberId);
         return member;
     }

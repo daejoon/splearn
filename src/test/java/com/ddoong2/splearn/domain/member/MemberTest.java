@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static com.ddoong2.splearn.domain.member.MemberFixture.createMemberRegisterRequest;
+import static com.ddoong2.splearn.domain.member.MemberFixture.createPasswordEncoder;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -14,8 +16,8 @@ class MemberTest {
 
     @BeforeEach
     void setUp() {
-        this.passwordEncoder = MemberFixture.createPasswordEncoder();
-        member = Member.register(MemberFixture.createMemberRegisterRequest(), passwordEncoder);
+        this.passwordEncoder = createPasswordEncoder();
+        member = Member.register(createMemberRegisterRequest().toInfo(), passwordEncoder);
     }
 
     @Test
@@ -103,10 +105,10 @@ class MemberTest {
     @DisplayName("이메일주소 검증")
     void invalidEmail() {
         assertThatThrownBy(() -> {
-            Member.register(MemberFixture.createMemberRegisterRequest("Invalid Email"), passwordEncoder);
+            Member.register(createMemberRegisterRequest("Invalid Email").toInfo(), passwordEncoder);
         }).isInstanceOf(IllegalArgumentException.class);
 
-        Member.register(MemberFixture.createMemberRegisterRequest(), passwordEncoder);
+        Member.register(createMemberRegisterRequest().toInfo(), passwordEncoder);
     }
 
     @Test

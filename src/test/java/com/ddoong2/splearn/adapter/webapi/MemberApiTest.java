@@ -2,10 +2,10 @@ package com.ddoong2.splearn.adapter.webapi;
 
 import com.ddoong2.splearn.adapter.webapi.dto.MemberRegisterResponse;
 import com.ddoong2.splearn.application.member.provided.MemberRegister;
+import com.ddoong2.splearn.application.member.provided.MemberRegisterRequest;
 import com.ddoong2.splearn.application.member.required.MemberRepository;
 import com.ddoong2.splearn.domain.member.Member;
 import com.ddoong2.splearn.domain.member.MemberFixture;
-import com.ddoong2.splearn.domain.member.MemberRegisterRequest;
 import com.ddoong2.splearn.domain.member.MemberStatus;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -44,8 +44,8 @@ class MemberApiTest {
         String requestJson = objectMapper.writeValueAsString(request);
 
         MvcTestResult result = mvcTester.post().uri("/api/members").contentType(MediaType.APPLICATION_JSON)
-                                        .content(requestJson)
-                                        .exchange();
+                .content(requestJson)
+                .exchange();
         assertThat(result)
                 .hasStatusOk()
                 .bodyJson()
@@ -71,8 +71,8 @@ class MemberApiTest {
         String requestJson = objectMapper.writeValueAsString(request);
 
         MvcTestResult result = mvcTester.post().uri("/api/members").contentType(MediaType.APPLICATION_JSON)
-                                        .content(requestJson)
-                                        .exchange();
+                .content(requestJson)
+                .exchange();
 
         assertThat(result)
                 .apply(print())
