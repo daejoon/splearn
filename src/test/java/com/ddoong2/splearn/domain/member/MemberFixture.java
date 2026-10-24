@@ -4,6 +4,11 @@ import com.ddoong2.splearn.application.member.provided.MemberRegisterRequest;
 import org.springframework.test.util.ReflectionTestUtils;
 
 public class MemberFixture {
+    public static Member createMember() {
+        Member member = Member.register(createMemberRegisterRequest().toInfo(), createPasswordEncoder());
+        return member;
+    }
+
     public static Member createMember(Long memberId) {
         Member member = Member.register(createMemberRegisterRequest().toInfo(), createPasswordEncoder());
         ReflectionTestUtils.setField(member, "id", memberId);
@@ -30,5 +35,11 @@ public class MemberFixture {
                 return encode(password).equals(passwordHash);
             }
         };
+    }
+
+    public static Member createActiveMember() {
+        Member member = createMember();
+        member.activate();
+        return member;
     }
 }
