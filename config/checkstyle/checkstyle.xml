@@ -11,6 +11,11 @@
     - import 순서: 그 외 → javax → java → static
     - 중괄호는 줄 끝, else/catch/finally는 } 와 같은 줄
     - 필드 앞 빈 줄 1줄 (Before field with/without annotations, in interface = 1)
+    - 선언부 연속 빈 줄 금지 (KEEP_BLANK_LINES_IN_DECLARATIONS=0)
+    - 삼항 연산자 ?, : 는 줄 앞 (TERNARY_OPERATION_SIGNS_ON_NEXT_LINE=true)
+    - 대입 연산자 = 는 줄 끝 (PLACE_ASSIGNMENT_SIGN_ON_NEXT_LINE=false)
+    - 메서드 체이닝 . 은 줄 앞 (METHOD_CALL_CHAIN_WRAP)
+    체크스타일로 강제할 수 없는 항목: 줄바꿈 시점(Wrap always, Chop down if long, Wrap first call)
 -->
 <module name="Checker">
     <property name="charset" value="UTF-8"/>
@@ -77,10 +82,26 @@
         <!-- 빈 줄 -->
         <module name="EmptyLineSeparator">
             <property name="allowNoEmptyLineBetweenFields" value="false"/>
-            <property name="allowMultipleEmptyLines" value="true"/>
+            <property name="allowMultipleEmptyLines" value="false"/>
             <property name="tokens"
                       value="PACKAGE_DEF, IMPORT, STATIC_IMPORT, CLASS_DEF, INTERFACE_DEF, ENUM_DEF,
                              RECORD_DEF, METHOD_DEF, CTOR_DEF, COMPACT_CTOR_DEF, VARIABLE_DEF"/>
+        </module>
+
+        <!-- 줄바꿈 위치 -->
+        <module name="OperatorWrap">
+            <property name="option" value="nl"/>
+            <property name="tokens" value="QUESTION, COLON"/>
+        </module>
+        <module name="OperatorWrap">
+            <property name="option" value="eol"/>
+            <property name="tokens"
+                      value="ASSIGN, PLUS_ASSIGN, MINUS_ASSIGN, STAR_ASSIGN, DIV_ASSIGN, MOD_ASSIGN,
+                             SR_ASSIGN, BSR_ASSIGN, SL_ASSIGN, BAND_ASSIGN, BXOR_ASSIGN, BOR_ASSIGN"/>
+        </module>
+        <module name="SeparatorWrap">
+            <property name="option" value="nl"/>
+            <property name="tokens" value="DOT"/>
         </module>
 
         <!-- 한 줄에 문장 하나 -->
