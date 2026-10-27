@@ -1,0 +1,9 @@
+#!/bin/sh
+# push 전에 checkstyle·spotbugs·test를 실행하고, 실패하면 push를 막는다.
+echo "[pre-push] ./gradlew check 실행 중..."
+./gradlew check
+status=$?
+if [ $status -ne 0 ]; then
+  echo "[pre-push] check 실패로 push를 중단합니다. (무시하려면 git push --no-verify)"
+  exit $status
+fi
