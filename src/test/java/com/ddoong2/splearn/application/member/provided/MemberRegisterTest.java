@@ -22,7 +22,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 @Transactional
 @Import(SplearnTestConfiguration.class)
 record MemberRegisterTest(MemberRegister memberRegister, EntityManager entityManager) {
-
     @Test
     @DisplayName("스프링부트 등록테스트")
     void _등록테스트() {

@@ -21,7 +21,6 @@ record MemberFinderTest(
         MemberRegister memberRegister,
         EntityManager entityManager
 ) {
-
     @Test
     @DisplayName("find")
     void _find() {

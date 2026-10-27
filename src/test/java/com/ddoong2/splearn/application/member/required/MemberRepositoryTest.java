@@ -16,7 +16,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DataJpaTest
 class MemberRepositoryTest {
-
     @Autowired
     MemberRepository memberRepository;
 

@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 
 @ControllerAdvice
 public class ApiControllerAdvice extends ResponseEntityExceptionHandler {
-
     @ExceptionHandler(Exception.class)
     public ProblemDetail handleException(Exception exception) {
         return getProblemDetail(HttpStatus.INTERNAL_SERVER_ERROR, exception);
