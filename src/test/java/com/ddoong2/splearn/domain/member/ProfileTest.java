@@ -7,7 +7,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 class ProfileTest {
-
     @Test
     @DisplayName("profile")
     void _profile() {
@@ -19,7 +18,8 @@ class ProfileTest {
     @Test
     @DisplayName("profileFail")
     void _profileFail() {
-        assertThatThrownBy(() -> new Profile("asdfkajsdfkjaskdfjkasjdfkajskdjfaksjfkajkfjaskfd")).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Profile("asdfkajsdfkjaskdfjkasjdfkajskdjfaksjfkajkfjaskfd"))
+                .isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> new Profile("AAA")).isInstanceOf(IllegalArgumentException.class);
         assertThatThrownBy(() -> new Profile("프로필")).isInstanceOf(IllegalArgumentException.class);
     }

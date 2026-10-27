@@ -33,8 +33,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 @RequiredArgsConstructor
 class MemberApiTest {
     final MockMvcTester mvcTester;
+
     final ObjectMapper objectMapper;
+
     final MemberRepository memberRepository;
+
     final MemberRegister memberRegister;
 
     @Test

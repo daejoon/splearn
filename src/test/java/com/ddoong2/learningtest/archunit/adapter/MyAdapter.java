@@ -5,6 +5,7 @@ import com.ddoong2.learningtest.archunit.domain.MyMember;
 
 public class MyAdapter {
     MyService myService;
+
     MyMember myMember;
 
     void run() {

@@ -22,8 +22,11 @@ import org.springframework.validation.annotation.Validated;
 @RequiredArgsConstructor
 public class MemberModifyService implements MemberRegister {
     private final MemberQueryService memberQueryService;
+
     private final MemberRepository memberRepository;
+
     private final EmailSender emailSender;
+
     private final PasswordEncoder passwordEncoder;
 
     @Override

@@ -24,6 +24,7 @@ import static org.mockito.Mockito.when;
 @RequiredArgsConstructor
 class MemberApiWebMvcTest {
     final MockMvcTester mvcTester;
+
     final ObjectMapper objectMapper;
 
     @MockitoBean
