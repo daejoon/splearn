@@ -10,6 +10,7 @@
     - 와일드카드 import 미사용 (CLASS/NAMES_COUNT_TO_USE_IMPORT_ON_DEMAND=999)
     - import 순서: 그 외 → javax → java → static
     - 중괄호는 줄 끝, else/catch/finally는 } 와 같은 줄
+    - 필드 앞 빈 줄 1줄 (Before field with/without annotations, in interface = 1)
 -->
 <module name="Checker">
     <property name="charset" value="UTF-8"/>
@@ -75,11 +76,11 @@
 
         <!-- 빈 줄 -->
         <module name="EmptyLineSeparator">
-            <property name="allowNoEmptyLineBetweenFields" value="true"/>
+            <property name="allowNoEmptyLineBetweenFields" value="false"/>
             <property name="allowMultipleEmptyLines" value="true"/>
             <property name="tokens"
                       value="PACKAGE_DEF, IMPORT, STATIC_IMPORT, CLASS_DEF, INTERFACE_DEF, ENUM_DEF,
-                             RECORD_DEF, METHOD_DEF, CTOR_DEF, COMPACT_CTOR_DEF"/>
+                             RECORD_DEF, METHOD_DEF, CTOR_DEF, COMPACT_CTOR_DEF, VARIABLE_DEF"/>
         </module>
 
         <!-- 한 줄에 문장 하나 -->
