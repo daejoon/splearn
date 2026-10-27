@@ -1,0 +1,42 @@
+# IntelliJ IDEA 코드 스타일 공유 설정
+# IntelliJ는 이 파일을 IDE 코드 스타일 스킴보다 우선 적용한다.
+# 빌드 시 검사 규칙은 config/checkstyle/checkstyle.xml 참고.
+root = true
+
+[*]
+charset = utf-8
+max_line_length = 140
+ij_visual_guides = 140
+ij_wrap_on_typing = true
+
+[*.java]
+indent_style = space
+indent_size = 4
+tab_width = 4
+ij_continuation_indent_size = 8
+
+# import: 와일드카드 import 사용 안 함
+ij_java_class_count_to_use_import_on_demand = 999
+ij_java_names_count_to_use_import_on_demand = 999
+
+# 빈 줄
+ij_java_keep_blank_lines_in_declarations = 0
+ij_java_blank_lines_around_field = 1
+ij_java_blank_lines_around_field_in_interface = 1
+ij_java_blank_lines_around_field_with_annotations = 1
+
+# 줄바꿈
+ij_java_wrap_long_lines = true
+ij_java_method_call_chain_wrap = on_every_item
+ij_java_wrap_first_method_in_call_chain = true
+ij_java_ternary_operation_wrap = split_into_lines
+ij_java_ternary_operation_signs_on_next_line = true
+ij_java_assignment_wrap = normal
+
+[{*.kt,*.kts}]
+ij_kotlin_allow_trailing_comma = true
+
+[{*.md,*.markdown}]
+ij_markdown_max_lines_around_header = 0
+ij_markdown_max_lines_around_block_elements = 0
+ij_markdown_max_lines_between_paragraphs = 0
