@@ -6,12 +6,12 @@
 - IntelliJ IDEA Ultimate 2025.2
 - JDK 21
 - Spring Boot 3.5.4
-    - Lombok
-    - Web
-    - Spring Data JPA
-    - MySQL Driver
-    - H2 Driver
-    - docker-compose
+  - Lombok
+  - Web
+  - Spring Data JPA
+  - MySQL Driver
+  - H2 Driver
+  - docker-compose
 
 ## Git Hooks
 clone 후 한 번 실행하면 `.githooks/`의 hook이 적용된다.
