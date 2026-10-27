@@ -1,5 +1,6 @@
 plugins {
     java
+    checkstyle
     id("org.springframework.boot") version "3.5.13"
     id("io.spring.dependency-management") version "1.1.7"
     id("com.github.spotbugs") version "6.4.8"
@@ -58,4 +59,10 @@ tasks.withType<Test> {
 
 spotbugs {
     excludeFilter.set(file("${projectDir}/spotbugs-exclude-filter.xml"))
+}
+
+checkstyle {
+    toolVersion = "10.21.4"
+    maxWarnings = 0
+    isIgnoreFailures = true
 }
