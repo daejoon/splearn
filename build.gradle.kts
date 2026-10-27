@@ -62,6 +62,6 @@ spotbugs {
 }
 
 checkstyle {
-    toolVersion = "10.21.4"
+    toolVersion = "14.3.0"
     maxWarnings = 0
 }
