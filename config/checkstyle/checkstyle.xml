@@ -5,7 +5,7 @@
 
 <!--
     IntelliJ IDEA 코드 스타일(IDE 전역 "Default" 스킴) 기준 규칙.
-    - 줄 길이 140자 (RIGHT_MARGIN=140)
+    - 줄 길이 120자 (RIGHT_MARGIN=120)
     - 들여쓰기 4칸, 연속 줄 8칸, 탭 미사용
     - 와일드카드 import 미사용 (CLASS/NAMES_COUNT_TO_USE_IMPORT_ON_DEMAND=999)
     - import 순서: 그 외 → javax → java → static
@@ -29,7 +29,7 @@
 
     <!-- 줄 길이 -->
     <module name="LineLength">
-        <property name="max" value="140"/>
+        <property name="max" value="120"/>
         <property name="ignorePattern" value="^(package|import) .*$"/>
     </module>
 
