@@ -3,8 +3,7 @@ package com.ddoong2.splearn.domain.member;
 import java.util.regex.Pattern;
 
 public record Profile(String address) {
-    private static final Pattern PROFILE_ADDRESS_PATTERN =
-            Pattern.compile("[a-z0-9]+");
+    private static final Pattern PROFILE_ADDRESS_PATTERN = Pattern.compile("[a-z0-9]+");
 
     public Profile {
         if (address == null || (!address.isEmpty()) && !PROFILE_ADDRESS_PATTERN.matcher(address).matches()) {
