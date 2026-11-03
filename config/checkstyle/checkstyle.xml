@@ -5,7 +5,7 @@
 
 <!--
     .editorconfig [*.java] 설정(IntelliJ 코드 스타일 Export) 기준 규칙.
-    - 줄 길이 120자 (max_line_length)
+    - 줄 길이 140자 (max_line_length)
     - 들여쓰기 4칸, 연속 줄 8칸, 탭 미사용 (indent_size, ij_continuation_indent_size, indent_style)
     - 빈 줄에 들여쓰기 공백 금지 (ij_java_keep_indents_on_empty_lines=false)
     - 와일드카드 import 미사용 (ij_java_class/names_count_to_use_import_on_demand=999)
@@ -35,7 +35,7 @@
 
     <!-- 줄 길이 -->
     <module name="LineLength">
-        <property name="max" value="120"/>
+        <property name="max" value="140"/>
         <property name="ignorePattern" value="^(package|import) .*$"/>
     </module>
 
