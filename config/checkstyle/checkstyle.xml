@@ -11,6 +11,7 @@
     - 와일드카드 import 미사용 (ij_java_class/names_count_to_use_import_on_demand=999)
     - import 순서: 그 외 → 빈 줄 → javax·java(빈 줄 없음) → 빈 줄 → static (ij_java_imports_layout)
     - 중괄호는 줄 끝, else/catch/finally/do-while은 } 와 같은 줄 (*_brace_style, *_on_new_line=false)
+    - 단순 메서드·블록·람다·클래스는 한 줄 허용 (ij_java_keep_simple_*_in_one_line=true)
     - 클래스·메서드·필드 어노테이션은 한 줄에 하나씩 (*_annotation_wrap=split_into_lines)
     - 단항 연산자·:: 앞뒤 공백 없음, 향상된 for 의 : 앞뒤 공백 (ij_java_space_*)
     - 필드·메서드·클래스 사이 빈 줄 1줄 (ij_java_blank_lines_around_*=1)
@@ -57,6 +58,12 @@
         <property name="message" value="^Extra separation in import group"/>
     </module>
 
+    <!-- LeftCurly(eol)는 { 뒤 줄바꿈도 강제하므로, 한 줄 블록({ return x; })을 위해 해당 메시지만 제외 -->
+    <module name="SuppressionSingleFilter">
+        <property name="id" value="leftCurlyEol"/>
+        <property name="message" value="should have line break after"/>
+    </module>
+
     <module name="TreeWalker">
         <!-- 들여쓰기 -->
         <module name="Indentation">
@@ -92,6 +99,7 @@
 
         <!-- 중괄호 위치 -->
         <module name="LeftCurly">
+            <property name="id" value="leftCurlyEol"/>
             <property name="option" value="eol"/>
         </module>
         <module name="RightCurly">
