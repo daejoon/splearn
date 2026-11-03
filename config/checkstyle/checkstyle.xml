@@ -17,7 +17,7 @@
     - 선언부 연속 빈 줄 금지 (ij_java_keep_blank_lines_in_declarations=0)
     - 코드 안 연속 빈 줄 최대 2줄 (ij_java_keep_blank_lines_in_code=2)
     - 삼항 연산자 ?, : 는 줄 앞 (ij_java_ternary_operation_signs_on_next_line=true)
-    - 이항 연산자는 줄 끝 (ij_java_binary_operation_sign_on_next_line=false)
+    - 이항 연산자는 줄 앞 (ij_java_binary_operation_sign_on_next_line=true)
     - 대입 연산자 = 는 줄 끝 (ij_java_place_assignment_sign_on_next_line=false)
     - 메서드 체이닝 . 은 줄 앞 (ij_java_method_call_chain_wrap)
     체크스타일로 강제할 수 없는 항목: 줄바꿈 시점(on_every_item, split_into_lines, wrap_first_method_in_call_chain),
@@ -147,7 +147,7 @@
             <property name="tokens" value="QUESTION, COLON"/>
         </module>
         <module name="OperatorWrap">
-            <property name="option" value="eol"/>
+            <property name="option" value="nl"/>
             <property name="tokens"
                       value="PLUS, MINUS, STAR, DIV, MOD, EQUAL, NOT_EQUAL, GT, GE, LT, LE, LAND, LOR,
                              BAND, BOR, BXOR, SL, SR, BSR, LITERAL_INSTANCEOF"/>
